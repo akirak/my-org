@@ -27,17 +27,17 @@
 
 ;;;; Org files
 
-(org-starter-define-file "scratch.org"
+(org-starter-def "scratch.org"
   :key "i"
   :required nil
-  :custom-vars 'org-default-notes-file
+  :custom-vars org-default-notes-file
   :agenda t
-  :refile '(:maxlevel . 2))
+  :refile (:maxlevel . 2))
 
-(org-starter-define-file "tasks.org"
+(org-starter-def "tasks.org"
   :required nil
   :agenda t
-  :refile '(:maxlevel . 9))
+  :refile (:maxlevel . 9))
 
 (org-starter-define-file "planner.org"
   :key "p"
@@ -74,14 +74,14 @@
      "%i %U"
      :empty-lines 1)))
 
-(org-starter-define-file "workflow.org"
+(org-starter-def "workflow.org"
   :key "w"
   :agenda nil
-  :refile '(:maxlevel . 4))
+  :refile (:maxlevel . 4))
 
-(org-starter-define-file "icebox.org"
+(org-starter-def "icebox.org"
   :key "m"
-  :refile '(:maxlevel . 9))
+  :refile (:maxlevel . 9))
 
 (defun akirak/buffer-mode-name (filename)
   (with-current-buffer (find-buffer-visiting filename)
@@ -110,20 +110,20 @@
                                                     :todo "TOPIC"
                                                     :tags '("topic")))))
 
-(org-starter-define-file "posts.org"
+(org-starter-def "posts.org"
   :key "P"
   :required nil
   :agenda t
-  :refile '(:level . 1))
+  :refile (:level . 1))
 
-(org-starter-define-file "accounting.org"
+(org-starter-def "accounting.org"
   :key "M"
   :agenda t
-  :refile '(:maxlevel . 3))
+  :refile (:maxlevel . 3))
 
-(org-starter-define-file "yankpad.org"
-  :set-default 'yankpad-file
-  :refile '(:level . 1))
+(org-starter-def "yankpad.org"
+  :set-default yankpad-file
+  :refile (:level . 1))
 
 ;; Set org-default-notes-file
 (unless (bound-and-true-p org-default-notes-file)
