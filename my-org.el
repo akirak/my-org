@@ -3,6 +3,7 @@
 (org-starter-def "~/org/"
   :add-to-path t
   :custom-vars (org-directory)
+  :config
   (org-starter-def "~/org/journal"
     :custom-vars org-journal-dir
     :config
