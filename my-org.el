@@ -112,7 +112,8 @@
               (file+function akirak/org-reverse-date-tree)
               ,(akirak/org-capture-entry-template-1 "%?" "%K"
                                                     :todo "TOPIC"
-                                                    :tags '("topic")))))
+                                                    :tags '("topic"))
+              :clock-in t :clock-resume t)))
 
 (org-starter-def "posts.org"
   :key "P"
