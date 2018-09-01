@@ -10,7 +10,11 @@
     (require 'init-org-journal)))
 
 (org-starter-def "~/learning"
-  :add-to-path t)
+  :add-to-path t
+  :config
+  (setq
+   bookmark-default-file "~/learning/emacs-bookmarks"
+   org-download-screenshot-file "~/learning/static/screenshots/scrot.png"))
 
 (org-starter-def "~/learning/natural-languages"
   :id language-learning
