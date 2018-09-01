@@ -116,8 +116,16 @@
   :agenda t
   :refile (:level . 1))
 
+(org-starter-def "ledger.org"
+  :directory "~/private/ledger"
+  :custom-vars org-hledger-file
+  :config
+  (setq org-hledger-tangle-file
+        (concat (file-name-sans-extension org-hledger-file) ".ledger")))
+
 (org-starter-def "accounting.org"
   :key "M"
+  :directory "~/private/ledger"
   :agenda t
   :refile (:maxlevel . 3))
 
