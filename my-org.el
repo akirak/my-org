@@ -167,11 +167,11 @@
                               (mapcar (lambda (fname)
                                         (org-starter-locate-file fname nil t))
                                       '("scratch.org"
-                                        "workflow.org"
                                         "emacs.org"
-                                        "code.org"
+                                        "workflow.org"
                                         "posts.org"
                                         "brainstorming.org"
+                                        "code.org"
                                         "subjects.org"
                                         "planner.org")))))
 
