@@ -125,6 +125,10 @@
   :set-default yankpad-file
   :refile (:level . 1))
 
+(org-starter-def "offtime.org"
+  :agenda nil
+  :custom-vars org-offtime-file)
+
 ;; Set org-default-notes-file
 (unless (bound-and-true-p org-default-notes-file)
   (setq org-default-notes-file "~/notes.org")
