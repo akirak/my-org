@@ -4,6 +4,7 @@
   :add-to-path t
   :custom-vars (org-directory)
   :config
+  (setq hledger-jfile "~/org/journal.ledger")
   (org-starter-def "~/org/journal"
     :custom-vars org-journal-dir
     :config
