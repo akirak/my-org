@@ -38,6 +38,15 @@
   :agenda t
   :refile (:maxlevel . 2))
 
+;; Write-only Org file on my phone
+;; You can add entries on the phone but not on any other devices
+(org-starter-def "phone.org"
+  :agenda t)
+
+;; Write-only Org file on my tablet
+(org-starter-def "tablet.org"
+  :agenda t)
+
 (org-starter-def "tasks.org"
   :required nil
   :agenda t
@@ -155,7 +164,7 @@
 (akirak/org-add-agenda-custom-command "b" "Main block agenda"
   '((agenda ""
             ((org-agenda-span 1)))
-    (tags "CATEGORY=\"scratch\""
+    (tags "CATEGORY=\{scratch\\|phone\\|tablet\}"
           ((org-agenda-overriding-header "Top-level headings in scratch")
            (org-tags-match-list-sublevels nil)))))
 
