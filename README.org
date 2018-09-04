@@ -2,3 +2,9 @@
 This is my configuration for Emacs Org mode.
 
 It has been separated from [[https://github.com/akirak/emacs.d][my Emacs configuration]], as most changes in the Org configuration are unlikely to be of interest to a few watching users of the main configuration repository.
+
+** Prerequisites
+- Emacs 26.1
+- [[https://github.com/akirak/org-starter][org-starter]]
+- [[https://github.com/akirak/org-reverse-datetree][org-reverse-datetree]]
+- Possibly some functions in my [[https://github.com/akirak/emacs.d][emacs.d]] repository
