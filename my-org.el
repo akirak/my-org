@@ -131,6 +131,10 @@
   :agenda t
   :refile (:level . 1))
 
+(org-starter-def "immersion.org"
+  :agenda t
+  :refile (:maxlevel . 3))
+
 (org-starter-def "ledger.org"
   :custom-vars org-hledger-file
   :deprecated t
