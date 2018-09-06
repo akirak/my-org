@@ -135,6 +135,13 @@
   :agenda t
   :refile (:maxlevel . 3))
 
+(org-starter-def "journal.org"
+  :agenda nil
+  :refile nil
+  :capture (("j" "Journal (empty)" plain
+             (file+function (lambda () (org-reverse-datetree-1 nil :week-tree t)))
+             "")))
+
 (org-starter-def "ledger.org"
   :custom-vars org-hledger-file
   :deprecated t
