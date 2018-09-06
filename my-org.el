@@ -109,17 +109,17 @@
   ;; Add templates for specific languages.
   :capture `(("c" "Code (org-babel)")
              ("cc" "Capture code" entry
-              (file+function org-reverse-date-tree-1)
+              (file+function org-reverse-datetree-1)
               ,(akirak/org-capture-entry-template-1 "%?%(which-function)"
                  "%a\n\n#+BEGIN_SRC %(akirak/buffer-mode-name \"%F\")\n%i\n#+END_SRC\n"
                  :todo "TODO")
               :clock-in t :clock-resume t)
              ("ce" "Babel code, Emacs Lisp" entry
-              (file+function org-reverse-date-tree-1)
+              (file+function org-reverse-datetree-1)
               ,(akirak/babel-capture-template "emacs-lisp")
               :clock-in t :clock-resume t)
              ("ct" "Topic in code.org" entry
-              (file+function org-reverse-date-tree-1)
+              (file+function org-reverse-datetree-1)
               ,(akirak/org-capture-entry-template-1 "%?" "%K"
                                                     :todo "TOPIC"
                                                     :tags '("@topic"))
