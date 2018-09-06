@@ -135,13 +135,6 @@
   :agenda t
   :refile (:maxlevel . 3))
 
-(org-starter-def "journal.org"
-  :agenda nil
-  :refile nil
-  :capture (("j" "Journal (empty)" plain
-             (file+function (lambda () (org-reverse-datetree-1 nil :week-tree t)))
-             "")))
-
 (org-starter-def "ledger.org"
   :custom-vars org-hledger-file
   :deprecated t
@@ -171,6 +164,27 @@
   (unless (file-exists-p org-default-notes-file)
     (with-temp-buffer
       (write-file org-default-notes-file))))
+
+(defun akirak/org-check-in-journal ()
+  (interactive)
+  (let* ((file "~/org/journal.org")
+         (buf (or (find-buffer-visiting file)
+                  (find-file-noselect file))))
+    (switch-to-buffer buf)
+    (widen)
+    (goto-char (point-min))
+    (if (org-reverse-datetree-1 nil :week-tree t)
+        (progn
+          (insert "\nCHECKIN: "
+                  (org-timestamp-format
+                   (org-timestamp-from-time (current-time))
+                   (org-time-stamp-format t t))
+                  "\n")
+          (org-narrow-to-subtree))
+      (org-narrow-to-subtree)
+      (message "Already checked in")
+      (org-end-of-subtree)
+      (insert "\n"))))
 
 ;;;; org-agenda custom commands (currently unused)
 
