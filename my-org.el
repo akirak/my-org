@@ -153,6 +153,8 @@
   :set-default yankpad-file
   :refile (:level . 1))
 
+(org-starter-def "timetables.org")
+
 (org-starter-def "offtime.org"
   :agenda nil
   :custom-vars org-offtime-file)
@@ -209,7 +211,8 @@
                                         "brainstorming.org"
                                         "code.org"
                                         "subjects.org"
-                                        "planner.org")))))
+                                        "planner.org"
+                                        "timetables.org")))))
 
 ;;;; Other org options
 
