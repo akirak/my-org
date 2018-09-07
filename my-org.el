@@ -5,6 +5,8 @@
   :custom-vars (org-directory)
   :config
   (setq hledger-jfile "~/org/journal.ledger")
+  (setq akirak/init-time-log-file
+        (format "~/org/log/emacs-init-%s.log" (system-name)))
   (org-starter-def "~/org/journal"
     :custom-vars org-journal-dir
     :config
