@@ -181,7 +181,7 @@
         (progn
           (insert "\nCHECKIN: "
                   (org-timestamp-format
-                   (org-timestamp-from-time (current-time))
+                   (org-timestamp-from-time (current-time) t)
                    (org-time-stamp-format t t))
                   "\n")
           (org-narrow-to-subtree))
