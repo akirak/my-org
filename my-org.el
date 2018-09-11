@@ -29,6 +29,9 @@
   ("chinese.org")
   ("japanese.org"))
 
+(org-starter-def "~/private"
+  :add-to-path t)
+
 (org-starter-def "~/private/ledger"
   :add-to-path t)
 
@@ -160,6 +163,18 @@
 (org-starter-def "offtime.org"
   :agenda nil
   :custom-vars org-offtime-file)
+
+;; To open this file in org-mode, it should contain the following header:
+;; -*- mode: org; mode: beancount -*-
+(org-starter-def "bookkeeping.bean"
+  :capture
+  (("l" "ledger (beancount)")
+   ("le" "Expense" plain (file+olp "Daybook") "%i"))
+  :config
+  (akirak/define-frame-workflow "ledger"
+    :layout
+    '(progn
+       (find-file (org-starter-locate-file "bookkeeping.bean")))))
 
 ;; Set org-default-notes-file
 (unless (bound-and-true-p org-default-notes-file)
