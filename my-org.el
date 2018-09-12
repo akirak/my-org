@@ -4,7 +4,6 @@
   :add-to-path t
   :custom-vars (org-directory)
   :config
-  (setq hledger-jfile "~/org/journal.ledger")
   (setq akirak/init-time-log-file
         (format "~/org/log/emacs-init-%s.log" (system-name)))
   (org-starter-def "~/org/journal"
@@ -63,7 +62,6 @@
   :agenda t
   :required nil
   :refile '(:maxlevel . 3)
-  :custom-vars '(org-focus-file)
   :capture `(("gr" "Item to read" entry
               (lambda ()
                 (goto-char (org-find-property "CUSTOM_ID" "main-reading-list")))
