@@ -61,14 +61,7 @@
   :key "p"
   :agenda t
   :required nil
-  :refile '(:maxlevel . 3)
-  :capture `(("gr" "Item to read" entry
-              (lambda ()
-                (goto-char (org-find-property "CUSTOM_ID" "main-reading-list")))
-              ,(akirak/org-capture-entry-template-1
-                   "^{Title}"
-                 "%i"
-                 :todo "TODO"))))
+  :refile '(:maxlevel . 3))
 
 (org-starter-define-file "subjects.org"
   :key "s"
@@ -134,9 +127,15 @@
   :agenda t
   :refile (:level . 1))
 
-(org-starter-def "immersion.org"
+(org-starter-define-file "immersion.org"
   :agenda t
-  :refile (:maxlevel . 3))
+  :refile '(:maxlevel . 3)
+  :capture
+  `(("gr" "Item to read" entry (file+olp "Reading")
+     ,(akirak/org-capture-entry-template-1
+          "^{Title}"
+        "%i"
+        :todo "TODO"))))
 
 (org-starter-def "ledger.org"
   :custom-vars org-hledger-file
