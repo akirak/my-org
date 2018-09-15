@@ -161,6 +161,12 @@
   :agenda nil
   :custom-vars org-offtime-file)
 
+(org-starter-def "facts.org"
+  :refile (:maxlevel . 2))
+
+(org-starter-def "advices.org"
+  :refile (:maxlevel . 3))
+
 ;; To open this file in org-mode, it should contain the following header:
 ;; -*- mode: org; mode: beancount -*-
 (org-starter-def "bookkeeping.bean"
