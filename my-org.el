@@ -79,20 +79,9 @@
   :refile '(:maxlevel . 9))
 
 (org-starter-define-file "brainstorming.org"
-  :key "b"
   :agenda t
   :refile '(:maxlevel . 9)
-  :capture
-  '(("R" "Reflection" plain
-     (file+function
-      (lambda ()
-        (goto-char (org-find-property "CUSTOM_ID" "reflection"))
-        (end-of-line)
-        (re-search-forward "^\*" nil t)
-        (end-of-line 0)
-        (insert "\n")))
-     "%i %U"
-     :empty-lines 1)))
+  :deprecated t)
 
 (org-starter-def "workflow.org"
   :key "w"
