@@ -99,10 +99,6 @@
   :agenda nil
   :refile (:maxlevel . 4))
 
-(org-starter-def "icebox.org"
-  :key "m"
-  :refile (:maxlevel . 9))
-
 (defun akirak/buffer-mode-name (filename)
   (with-current-buffer (find-buffer-visiting filename)
     (string-remove-suffix "-mode" (symbol-name major-mode))))
@@ -146,20 +142,6 @@
           "^{Title}"
         "%i"
         :todo "TODO"))))
-
-(org-starter-def "ledger.org"
-  :custom-vars org-hledger-file
-  :deprecated t
-  :config
-  (setq org-hledger-tangle-file
-        (concat (file-name-sans-extension org-hledger-file) ".ledger")))
-
-(org-starter-def "accounting.org"
-  :key "M"
-  :deprecated t
-  :directory "~/private/ledger"
-  :agenda t
-  :refile (:maxlevel . 3))
 
 (org-starter-def "yankpad.org"
   :set-default yankpad-file
