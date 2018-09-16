@@ -1,5 +1,9 @@
 ;;;; Org directories
 
+;;;;; ~/org
+;; This is my main repository for Org files. It is synchronized with
+;; Android devices using Syncthing and periodically backed up by Git.
+;; On Android, I use Orgzly to access Org files in this directory.
 (org-starter-def "~/org/"
   :add-to-path t
   :custom-vars (org-directory)
@@ -11,6 +15,10 @@
     :config
     (require 'init-org-journal)))
 
+;;;;; ~/learning
+;; This is a secondary repository. It is a Git repository which is
+;; pushed to a remote server (currently GitHub).
+
 (org-starter-def "~/learning"
   :add-to-path t
   :config
@@ -18,6 +26,9 @@
    bookmark-default-file "~/learning/emacs-bookmarks"
    org-download-screenshot-file "~/learning/static/screenshots/scrot.png"))
 
+;; This is a subdirectory of the repository, and it contains Org
+;; files for linguistic study (I am neither a linguist or a student,
+;; but I have to learn foreign languages.
 (org-starter-def "~/learning/natural-languages"
   :id language-learning
   :add-to-path t
@@ -28,10 +39,9 @@
   ("chinese.org")
   ("japanese.org"))
 
+;;;;; ~/private
+;; This is a repository for files that should be kept private.
 (org-starter-def "~/private"
-  :add-to-path t)
-
-(org-starter-def "~/private/ledger"
   :add-to-path t)
 
 ;;;; Org files
