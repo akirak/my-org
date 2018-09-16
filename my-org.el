@@ -210,7 +210,7 @@
 
 ;;;; org-agenda custom commands (currently unused)
 
-(akirak/org-add-agenda-custom-command "b" "Main block agenda"
+(org-starter-add-agenda-custom-command "b" "Main block agenda"
   '((agenda ""
             ((org-agenda-span 1)))
     (tags "CATEGORY=\{scratch\\|phone\\|tablet\}"
