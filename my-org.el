@@ -152,7 +152,7 @@
 ;; -*- mode: org; mode: beancount -*-
 (org-starter-def "bookkeeping.bean"
   :capture
-  (("l" "ledger (beancount)")
+  (("l" "Log/ledger")
    ("le" "Expense" plain (file+olp "Daybook") "%i"))
   :config
   (akirak/define-frame-workflow "ledger"
@@ -168,9 +168,15 @@
     (with-temp-buffer
       (write-file org-default-notes-file))))
 
+(org-starter-def "journal.org"
+  :capture
+  (("lt" "Time" entry (file+function
+                       (lambda () (org-reverse-datetree-1 nil :week-tree t)))
+    "* %U %i%? %^g")))
+
 (defun akirak/org-check-in-journal ()
   (interactive)
-  (let* ((file "~/org/journal.org")
+  (let* ((file (org-starter-locate-file "journal.org" nil t))
          (buf (or (find-buffer-visiting file)
                   (find-file-noselect file))))
     (switch-to-buffer buf)
