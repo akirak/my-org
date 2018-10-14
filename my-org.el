@@ -26,19 +26,6 @@
    bookmark-default-file "~/learning/emacs-bookmarks"
    org-download-screenshot-file "~/learning/static/screenshots/scrot.png"))
 
-;; This is a subdirectory of the repository, and it contains Org
-;; files for linguistic study (I am neither a linguist or a student,
-;; but I have to learn foreign languages.
-(org-starter-def "~/learning/natural-languages"
-  :id language-learning
-  :add-to-path t
-  :agenda nil
-  :refile (:maxlevel . 1)
-  :files
-  ("english.org")
-  ("chinese.org")
-  ("japanese.org"))
-
 ;;;;; ~/private
 ;; This is a repository for files that should be kept private.
 (org-starter-def "~/private"
@@ -147,6 +134,15 @@
 
 (org-starter-def "advices.org"
   :refile (:maxlevel . 3))
+
+(org-starter-def "english.org"
+  :refile (:maxlevel . 1))
+
+(org-starter-def "chinese.org"
+  :refile (:maxlevel . 1))
+
+(org-starter-def "japanese.org"
+  :refile (:maxlevel . 1))
 
 (org-starter-def "trash.org"
   :refile (:level . 0))
