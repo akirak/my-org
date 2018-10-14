@@ -148,6 +148,9 @@
 (org-starter-def "advices.org"
   :refile (:maxlevel . 3))
 
+(org-starter-def "trash.org"
+  :refile (:level . 0))
+
 ;; To open this file in org-mode, it should contain the following header:
 ;; -*- mode: org; mode: beancount -*-
 (org-starter-def "bookkeeping.bean"
