@@ -152,8 +152,7 @@
 ;; -*- mode: org; mode: beancount -*-
 (org-starter-def "bookkeeping.bean"
   :capture
-  (("l" "Log/ledger")
-   ("le" "Expense" plain (file+olp "Daybook") "%i"))
+  (("l" "Log to the cashbook" plain (file+olp "Daybook") "%i"))
   :config
   (akirak/define-frame-workflow "ledger"
     :layout
@@ -170,9 +169,9 @@
 
 (org-starter-def "journal.org"
   :capture
-  (("lt" "Time" entry (file+function
-                       (lambda () (org-reverse-datetree-1 nil :week-tree t)))
-    "* %U %i%? %^g")))
+  (("j" "Log event" entry (file+function
+                      (lambda () (org-reverse-datetree-1 nil :week-tree t)))
+    "* %^U %i%? %^g")))
 
 (defun akirak/org-check-in-journal ()
   (interactive)
