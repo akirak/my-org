@@ -73,6 +73,7 @@
 (org-starter-def "workflow.org"
   :key "w"
   :agenda nil
+  :deprecated t
   :refile (:maxlevel . 4))
 
 (defun akirak/buffer-mode-name (filename)
@@ -130,18 +131,23 @@
   :custom-vars org-offtime-file)
 
 (org-starter-def "facts.org"
+  :agenda t
   :refile (:maxlevel . 2))
 
 (org-starter-def "advices.org"
+  :agenda t
   :refile (:maxlevel . 3))
 
 (org-starter-def "english.org"
+  :agenda t
   :refile (:maxlevel . 1))
 
 (org-starter-def "chinese.org"
+  :agenda t
   :refile (:maxlevel . 1))
 
 (org-starter-def "japanese.org"
+  :agenda t
   :refile (:maxlevel . 1))
 
 (org-starter-def "trash.org"
@@ -167,6 +173,7 @@
       (write-file org-default-notes-file))))
 
 (org-starter-def "journal.org"
+  :agenda t
   :capture
   (("j" "Log event" entry (file+function
                       (lambda () (org-reverse-datetree-1 nil :week-tree t)))
