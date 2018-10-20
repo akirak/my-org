@@ -216,8 +216,7 @@
                                         "brainstorming.org"
                                         "code.org"
                                         "subjects.org"
-                                        "planner.org"
-                                        "timetables.org")))))
+                                        "planner.org")))))
 
 ;;;; Other org options
 
