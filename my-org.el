@@ -150,6 +150,12 @@
   :agenda t
   :refile (:maxlevel . 1))
 
+(org-starter-define-file "groceries.org"
+  :capture
+  `(("gg" "Add an item to grocery list" entry
+     ,(akirak/org-capture-entry-template-1 "%i%?"
+        "" :todo "TODO"))))
+
 (org-starter-def "trash.org"
   :refile (:level . 0))
 
