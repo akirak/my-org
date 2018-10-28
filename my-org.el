@@ -213,7 +213,15 @@
             ((org-agenda-span 1)))
     (tags "CATEGORY=\{scratch\\|phone\\|tablet\}"
           ((org-agenda-overriding-header "Top-level headings in scratch")
-           (org-tags-match-list-sublevels nil)))))
+           (org-tags-match-list-sublevels nil)
+           (org-agenda-sorting-strategy '(priority-down))
+           (org-super-agenda-groups
+            '((:todo ("DONE" "ARCHIVED"))
+              (:todo "REVIEW")
+              (:todo "STARTED")
+              (:todo "NEXT")))))
+    (tags-todo "CATEGORY=\"journal\""
+               ((org-tags-match-list-sublevels nil)))))
 
 ;;;; Custom rifle commands
 
