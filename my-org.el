@@ -223,6 +223,12 @@
     (tags-todo "CATEGORY=\"journal\""
                ((org-tags-match-list-sublevels nil)))))
 
+(org-starter-add-agenda-custom-command "f" "Focus"
+  ;; @focus tag is usually set as a file tag
+  '((tags-todo "@focus"
+               ((org-agenda-overriding-header "Tasks in specific categories")
+                (org-tags-match-list-sublevels nil)))))
+
 ;;;; Custom rifle commands
 
 (defun akirak/helm-org-rifle-knowledge-base ()
