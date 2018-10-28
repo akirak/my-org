@@ -150,6 +150,10 @@
   :agenda t
   :refile (:maxlevel . 1))
 
+(org-starter-def "korean.org"
+  :agenda t
+  :refile (:maxlevel . 1))
+
 (org-starter-define-file "groceries.org"
   :capture
   `(("gg" "Add an item to grocery list" entry
@@ -206,7 +210,7 @@
       (org-end-of-subtree)
       (insert "\n"))))
 
-;;;; org-agenda custom commands (currently unused)
+;;;; org-agenda custom commands
 
 (org-starter-add-agenda-custom-command "b" "Main block agenda"
   '((agenda ""
