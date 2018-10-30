@@ -214,7 +214,14 @@
 
 (org-starter-add-agenda-custom-command "b" "Main block agenda"
   '((agenda ""
-            ((org-agenda-span 1)))
+            ((org-agenda-span 1)
+             (org-agenda-prefix-format "  %4e ")
+             (org-super-agenda-groups
+              '((:tag "@errand")
+                (:tag "@focus")
+                (:tag "@buffer")
+                (:habit t)
+                (:auto-category t)))))
     (tags "CATEGORY=\{scratch\\|phone\\|tablet\}"
           ((org-agenda-overriding-header "Top-level headings in scratch")
            (org-tags-match-list-sublevels nil)
