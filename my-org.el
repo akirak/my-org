@@ -241,7 +241,20 @@
   ;; @focus tag is usually set as a file tag
   '((tags-todo "@focus"
                ((org-agenda-overriding-header "Tasks in specific categories")
-                (org-tags-match-list-sublevels nil)))))
+                (org-agenda-sorting-strategy '(scheduled-down priority-up))
+                (org-agenda-prefix-format "  %5e %s %-7c %b")
+                (org-super-agenda-groups
+                 '((:todo "REVIEW")
+                   (:tag "@fix")
+                   (:todo "STARTED")
+                   (:todo "NEXT")
+                   (:auto-category t)))))))
+
+(akirak/define-frame-workflow "focus"
+  :key "f"
+  :layout '(progn
+             (org-agenda nil "f")
+             (delete-other-windows)))
 
 ;;;; Custom rifle commands
 
