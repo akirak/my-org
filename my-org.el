@@ -138,21 +138,16 @@
   :agenda t
   :refile (:maxlevel . 3))
 
-(org-starter-def "english.org"
-  :agenda t
-  :refile (:maxlevel . 1))
-
-(org-starter-def "chinese.org"
-  :agenda t
-  :refile (:maxlevel . 1))
-
-(org-starter-def "japanese.org"
-  :agenda t
-  :refile (:maxlevel . 1))
-
-(org-starter-def "korean.org"
-  :agenda t
-  :refile (:maxlevel . 1))
+;; Configure files for linguistic study.
+;; All of these files have basically the same structure, but they can
+;; also have some additional language-specific structures.
+(dolist (filename '("english.org"
+                    "chinese.org"
+                    "japanese.org"
+                    "korean.org"))
+  (org-starter-define-file filename
+    :agenda t
+    :refile '(:maxlevel . 1)))
 
 (org-starter-define-file "groceries.org"
   :capture
