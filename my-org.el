@@ -33,6 +33,8 @@
 
 ;;;; Org files
 
+;;;;; Inbox files
+
 (org-starter-def "scratch.org"
   :key "i"
   :required nil
@@ -40,14 +42,20 @@
   :agenda t
   :refile (:maxlevel . 2))
 
-;; Write-only Org file on my phone
-;; You can add entries on the phone but not on any other devices
+;; Inbox file on the phone
+;; To avoid synchronization conflicts, I add new entries to this file
+;; and usually not to other files when I am on my phone.
+;; When I am on my computer, I refile entries in this file to other
+;; permanent files.
 (org-starter-def "phone.org"
   :agenda t)
 
-;; Write-only Org file on my tablet
+;; Inbox file on the tablet
+;; The same as above
 (org-starter-def "tablet.org"
   :agenda t)
+
+;;;;; Tasks and notes
 
 (org-starter-def "tasks.org"
   :required nil
