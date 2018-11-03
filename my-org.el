@@ -218,24 +218,40 @@
 (org-starter-add-agenda-custom-command "b" "Main block agenda"
   '((agenda ""
             ((org-agenda-span 1)
-             (org-agenda-prefix-format "  %4e ")
+             (org-agenda-prefix-format "  %4e %t %-7:c ")
              (org-super-agenda-groups
-              '((:tag "@errand")
-                (:tag "@focus")
+              '((:tag "@focus")
+                (:tag "@errand")
+                (:tag "housekeeping")
                 (:tag "@buffer")
                 (:habit t)
                 (:auto-category t)))))
+    (tags-todo "CATEGORY=\"journal\""
+               ((org-tags-match-list-sublevels nil)))
     (tags "CATEGORY=\{scratch\\|phone\\|tablet\}"
           ((org-agenda-overriding-header "Top-level headings in scratch")
            (org-tags-match-list-sublevels nil)
            (org-agenda-sorting-strategy '(priority-down))
            (org-super-agenda-groups
             '((:todo ("DONE" "ARCHIVED"))
+              (:tag "@urgent")
               (:todo "REVIEW")
               (:todo "STARTED")
-              (:todo "NEXT")))))
-    (tags-todo "CATEGORY=\"journal\""
-               ((org-tags-match-list-sublevels nil)))))
+              (:todo "NEXT")
+              (:tag "troubleshooting")
+              (:tag "@explore")
+              (:tag "@coding")))))
+    (tags-todo "CATEGORY=\"tasks\""
+               ((org-agenda-overriding-header "Unscheduled tasks in tasks category")
+                (org-agenda-prefix-format "  %b ")
+                (org-agenda-sorting-strategy '(priority-down))
+                (org-super-agenda-groups
+                 '((:discard (:scheduled t))
+                   (:todo "STARTED")
+                   (:todo "NEXT")
+                   (:priority "A")
+                   ;; Group by tags as you like
+                   (:tag "maintenance")))))))
 
 (org-starter-add-agenda-custom-command "f" "Focus"
   ;; @focus tag is usually set as a file tag
