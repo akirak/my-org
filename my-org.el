@@ -272,6 +272,34 @@
              (org-agenda nil "f")
              (delete-other-windows)))
 
+(org-starter-add-agenda-custom-command "r" "Review"
+  '((tags-todo "CATEGORY=\"facts\""
+               ((org-agenda-overriding-header "Reflection")
+                (org-agenda-prefix-format "  ")
+                (org-super-agenda-groups
+                 '((:auto-group t)))))
+    (tags-todo "CATEGORY=\"advices\""
+               ((org-agenda-sorting-strategy '(user-defined-up))
+                (org-agenda-prefix-format "  ")
+                (org-agenda-cmp-user-defined 'akirak/org-agenda-cmp-sanity-level)))))
+
+(defun akirak/org-agenda-cmp-sanity-level (a b)
+  (let* ((ma (or (get-text-property 1 'org-marker a)
+                 (get-text-property 1 'org-hd-marker a)))
+         (mb (or (get-text-property 1 'org-marker b)
+                 (get-text-property 1 'org-hd-marker b)))
+         (fa (and ma (marker-buffer ma)))
+         (fb (and mb (marker-buffer mb)))
+         (la (and fa (with-current-buffer fa (org-entry-get ma "SANITY_LEVEL"))))
+         (lb (and fb (with-current-buffer fb (org-entry-get mb "SANITY_LEVEL")))))
+    (or (and la lb (< (math-read-number la) (math-read-number lb)))
+        0)))
+
+(org-starter-add-agenda-custom-command "x" "Explore"
+  'tags-todo "@explore"
+  '((org-agenda-overriding-header "Explore")
+    (org-agenda-prefix-format "  %-8:c %b ")
+    (org-agenda-sorting-strategy '(priority-down))))
 
 ;;;; Other org options
 
