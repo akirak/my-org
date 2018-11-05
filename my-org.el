@@ -272,21 +272,6 @@
              (org-agenda nil "f")
              (delete-other-windows)))
 
-;;;; Custom rifle commands
-
-(defun akirak/helm-org-rifle-knowledge-base ()
-  (interactive)
-  (helm-org-rifle-files (delq nil
-                              (mapcar (lambda (fname)
-                                        (org-starter-locate-file fname nil t))
-                                      '("scratch.org"
-                                        "emacs.org"
-                                        "workflow.org"
-                                        "posts.org"
-                                        "brainstorming.org"
-                                        "code.org"
-                                        "subjects.org"
-                                        "planner.org")))))
 
 ;;;; Other org options
 
