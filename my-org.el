@@ -302,6 +302,44 @@
     (org-agenda-prefix-format "  %-8:c %b ")
     (org-agenda-sorting-strategy '(priority-down))))
 
+;;;; Startup
+
+(defconst akirak/org-start-page-buffer "*start*")
+
+(defun akirak/org-start-page-buffer ()
+  "Open my \"start page\" or return its buffer."
+  (when-let ((buf (get-buffer akirak/org-start-page-buffer)))
+    (kill-buffer buf))
+  (when-let ((file (org-starter-locate-file "advices.org" nil t)))
+    (with-current-buffer (or (find-buffer-visiting file)
+                             (find-file-noselect file))
+      (org-with-wide-buffer
+       (if-let ((pos (org-find-property "CUSTOM_ID" "entry-points")))
+           (let ((org-indirect-buffer-display 'current-window))
+             (goto-char pos)
+             (org-tree-to-indirect-buffer)
+             (rename-buffer akirak/org-start-page-buffer)
+             (setq buffer-read-only t)
+             (current-buffer))
+         (user-error "Cannot find an entry with CUSTOM_ID property set to emacs-start"))))))
+
+(defun akirak/org-start-page ()
+  "Load my startup page in Org."
+  (interactive)
+  (let ((buf (akirak/org-start-page-buffer)))
+    ;; In interactive calls, display the buffer in the current window.
+    (pop-to-buffer-same-window buf)))
+
+;; Override the existing function to set up startup windows.
+(defun akirak/setup-startup-windows ()
+  (switch-to-buffer "*Messages*")
+  (if (< (frame-width) 160)
+      (split-window-below)
+    (split-window-right))
+  (switch-to-buffer (akirak/org-start-page-buffer)))
+
+(add-hook 'emacs-startup-hook 'akirak/setup-startup-windows)
+
 ;;;; Other org options
 
 (with-eval-after-load 'org-clock
