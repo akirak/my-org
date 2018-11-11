@@ -218,7 +218,7 @@
 (org-starter-add-agenda-custom-command "b" "Main block agenda"
   '((agenda ""
             ((org-agenda-span 1)
-             (org-agenda-prefix-format "  %4e %t %-7:c ")
+             (org-agenda-prefix-format "  %4e %t %-7:c %s ")
              (org-super-agenda-groups
               '((:tag "@focus")
                 (:tag "@errand")
