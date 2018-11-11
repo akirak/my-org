@@ -276,6 +276,7 @@
   '((tags-todo "CATEGORY=\"facts\""
                ((org-agenda-overriding-header "Reflection")
                 (org-agenda-prefix-format "  ")
+                (org-agenda-sorting-strategy '(priority-down))
                 (org-super-agenda-groups
                  '((:auto-group t)))))
     (tags-todo "CATEGORY=\"advices\""
