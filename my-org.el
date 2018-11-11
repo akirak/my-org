@@ -279,10 +279,33 @@
                 (org-agenda-sorting-strategy '(priority-down))
                 (org-super-agenda-groups
                  '((:auto-group t)))))
-    (tags-todo "CATEGORY=\"advices\""
-               ((org-agenda-sorting-strategy '(user-defined-up))
-                (org-agenda-prefix-format "  ")
-                (org-agenda-cmp-user-defined 'akirak/org-agenda-cmp-sanity-level)))))
+    (tags-todo "CATEGORY=\"advices\"/STARTED"
+               ((org-agenda-overriding-header "Working on")
+                (org-agenda-prefix-format
+                 "  %(org-entry-get nil \"DEADLINE\") %(or (org-entry-get nil \"PROGRESS\") \"0%\") %b")
+                (org-tags-match-list-sublevels t)))
+    (tags-todo "CATEGORY=\"advices\"/NEXT"
+               ((org-agenda-overriding-header "Up next")
+                (org-tags-match-list-sublevels t)))
+    ;; (tags-todo "CATEGORY=\"advices\""
+    ;;            ((org-agenda-overriding-header "Status")
+    ;;             (org-agenda-prefix-format "  %b ")
+    ;;             (org-agenda-dim-blocked-tasks 'invisible)
+    ;;             (org-super-agenda-groups
+    ;;              '((:todo "REVIEW")
+    ;;                (:todo "STARTED")
+    ;;                (:todo "NEXT")
+    ;;                (:discard (:anything t))))))
+    (tags-todo "CATEGORY=\"advices\"-@invalid"
+               ((org-agenda-overriding-header "Overview")
+                (org-agenda-sorting-strategy '(user-defined-up))
+                (org-agenda-prefix-format "  %s ")
+                (org-tags-match-list-sublevels nil)
+                (org-agenda-cmp-user-defined 'akirak/org-agenda-cmp-sanity-level)))
+    (tags-todo "CATEGORY=\"advices\"+@invalid"
+               ((org-agenda-overriding-header "Invalid")
+                (org-tags-match-list-sublevels nil)
+                (org-agenda-prefix-format "  %b ")))))
 
 (defun akirak/org-agenda-cmp-sanity-level (a b)
   (let* ((ma (or (get-text-property 1 'org-marker a)
