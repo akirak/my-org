@@ -116,7 +116,7 @@
   :key "P"
   :required nil
   :agenda t
-  :refile (:level . 1))
+  :refile (:maxlevel . 3))
 
 (org-starter-define-file "immersion.org"
   :agenda t
