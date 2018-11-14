@@ -363,6 +363,12 @@
 
 (add-hook 'emacs-startup-hook 'akirak/setup-startup-windows)
 
+(defun akirak/refresh-session ()
+  (interactive)
+  (save-some-buffers t)
+  (desktop-clear)
+  (akirak/org-start-page))
+
 ;;;; Other org options
 
 (with-eval-after-load 'org-clock
