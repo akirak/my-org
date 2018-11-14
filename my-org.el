@@ -213,6 +213,28 @@
       (org-end-of-subtree)
       (insert "\n"))))
 
+(defun akirak/org-schedule-event-in-journal (arg)
+  "Refile an entry under the cursor into the journal file.
+
+This command refiles the entry on a particular date in the date tree
+in the journal file. With prefix ARG, move the point to the
+destination."
+  (interactive "P")
+  (unless (derived-mode-p 'org-mode)
+    (user-error "Not in org-mode"))
+  (when-let
+      ((date (org-read-date nil nil nil "Scheduled date: "))
+       (file (org-starter-locate-file "journal.org" nil t))
+       (rfloc (with-current-buffer (or (find-buffer-visiting file)
+                                       (find-file-no-select file))
+                (org-reverse-datetree-1 (org-time-string-to-time date)
+                                        :week-tree t)
+                (list nil file nil (point)))))
+    (org-schedule nil date)
+    (org-refile nil nil rfloc)
+    (when arg
+      (org-refile '(16)))))
+
 ;;;; org-agenda custom commands
 
 (org-starter-add-agenda-custom-command "b" "Main block agenda"
