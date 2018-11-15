@@ -248,8 +248,10 @@ destination."
                 (:tag "@buffer")
                 (:habit t)
                 (:auto-category t)))))
-    (tags-todo "CATEGORY=\"journal\""
-               ((org-tags-match-list-sublevels nil)))
+    (tags-todo "CATEGORY=\"journal\"&SCHEDULED<\"<+0d>\""
+               ((org-agenda-overriding-header "Finishing journal entries")
+                (org-tags-match-list-sublevels nil)
+                (org-agenda-todo-ignore-scheduled 'future)))
     (tags "CATEGORY=\{scratch\\|phone\\|tablet\}"
           ((org-agenda-overriding-header "Top-level headings in scratch")
            (org-tags-match-list-sublevels nil)
