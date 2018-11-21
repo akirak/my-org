@@ -16,8 +16,9 @@
     (require 'init-org-journal)))
 
 ;;;;; ~/learning
-;; This is a secondary repository. It is a Git repository which is
-;; pushed to a remote server (currently GitHub).
+;; This is my secondary repository for miscellaneous records.
+;; It is a Git repository which is pushed to a remote server
+;; (currently GitHub).
 
 (org-starter-def "~/learning"
   :add-to-path t
