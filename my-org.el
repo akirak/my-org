@@ -189,9 +189,10 @@
 (org-starter-def "journal.org"
   :agenda t
   :capture
-  (("j" "Log event" entry (file+function
-                      (lambda () (org-reverse-datetree-1 nil :week-tree t)))
-    "* %^U %i%? %^g")))
+  (("j" "Log event" entry
+    (file+function (lambda () (org-reverse-datetree-1 nil :week-tree t)))
+    "* %^U %i%? %^g"
+    :clock-in t :clock-resume t)))
 
 (defun akirak/org-check-in-journal ()
   (interactive)
