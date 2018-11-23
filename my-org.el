@@ -16,8 +16,9 @@
     (require 'init-org-journal)))
 
 ;;;;; ~/learning
-;; This is a secondary repository. It is a Git repository which is
-;; pushed to a remote server (currently GitHub).
+;; This is my secondary repository for miscellaneous records.
+;; It is a Git repository which is pushed to a remote server
+;; (currently GitHub).
 
 (org-starter-def "~/learning"
   :add-to-path t
@@ -112,11 +113,27 @@
                                                     :tags '("@topic"))
               :clock-in t :clock-resume t)))
 
+(defun akirak/org-refile-to-code (arg)
+  "Refile the current entry into the date tree in code.org.
+
+When the prefix ARG is set, jump to the date tree."
+  (interactive "P")
+  (when-let
+      ((date (org-read-date nil nil nil "Refile to code.org on date: "))
+       (file (org-starter-locate-file "code.org" nil t))
+       (rfloc (with-current-buffer (or (find-buffer-visiting file)
+                                       (find-file-no-select file))
+                (org-reverse-datetree-1 (org-time-string-to-time date)
+                                        :return 'rfloc))))
+    (org-refile nil nil rfloc)
+    (when arg
+      (org-refile '(16)))))
+
 (org-starter-def "posts.org"
   :key "P"
   :required nil
   :agenda t
-  :refile (:level . 1))
+  :refile (:maxlevel . 3))
 
 (org-starter-define-file "immersion.org"
   :agenda t
@@ -188,9 +205,10 @@
 (org-starter-def "journal.org"
   :agenda t
   :capture
-  (("j" "Log event" entry (file+function
-                      (lambda () (org-reverse-datetree-1 nil :week-tree t)))
-    "* %^U %i%? %^g")))
+  (("j" "Log event" entry
+    (file+function (lambda () (org-reverse-datetree-1 nil :week-tree t)))
+    "* %^U %i%? %^g"
+    :clock-in t :clock-resume t)))
 
 (defun akirak/org-check-in-journal ()
   (interactive)
@@ -213,12 +231,34 @@
       (org-end-of-subtree)
       (insert "\n"))))
 
+(defun akirak/org-schedule-event-in-journal (arg)
+  "Refile an entry under the cursor into the journal file.
+
+This command refiles the entry on a particular date in the date tree
+in the journal file. With prefix ARG, move the point to the
+destination."
+  (interactive "P")
+  (unless (derived-mode-p 'org-mode)
+    (user-error "Not in org-mode"))
+  (when-let
+      ((date (org-read-date nil nil nil "Scheduled date: "))
+       (file (org-starter-locate-file "journal.org" nil t))
+       (rfloc (with-current-buffer (or (find-buffer-visiting file)
+                                       (find-file-no-select file))
+                (org-reverse-datetree-1 (org-time-string-to-time date)
+                                        :week-tree t)
+                (list nil file nil (point)))))
+    (org-schedule nil date)
+    (org-refile nil nil rfloc)
+    (when arg
+      (org-refile '(16)))))
+
 ;;;; org-agenda custom commands
 
 (org-starter-add-agenda-custom-command "b" "Main block agenda"
   '((agenda ""
             ((org-agenda-span 1)
-             (org-agenda-prefix-format "  %4e %t %-7:c ")
+             (org-agenda-prefix-format "  %4e %t %-7:c %s ")
              (org-super-agenda-groups
               '((:tag "@focus")
                 (:tag "@errand")
@@ -226,8 +266,10 @@
                 (:tag "@buffer")
                 (:habit t)
                 (:auto-category t)))))
-    (tags-todo "CATEGORY=\"journal\""
-               ((org-tags-match-list-sublevels nil)))
+    (tags-todo "CATEGORY=\"journal\"&SCHEDULED<\"<+0d>\""
+               ((org-agenda-overriding-header "Finishing journal entries")
+                (org-tags-match-list-sublevels nil)
+                (org-agenda-todo-ignore-scheduled 'future)))
     (tags "CATEGORY=\{scratch\\|phone\\|tablet\}"
           ((org-agenda-overriding-header "Top-level headings in scratch")
            (org-tags-match-list-sublevels nil)
@@ -279,10 +321,33 @@
                 (org-agenda-sorting-strategy '(priority-down))
                 (org-super-agenda-groups
                  '((:auto-group t)))))
-    (tags-todo "CATEGORY=\"advices\""
-               ((org-agenda-sorting-strategy '(user-defined-up))
-                (org-agenda-prefix-format "  ")
-                (org-agenda-cmp-user-defined 'akirak/org-agenda-cmp-sanity-level)))))
+    (tags-todo "CATEGORY=\"advices\"/STARTED"
+               ((org-agenda-overriding-header "Working on")
+                (org-agenda-prefix-format
+                 "  %(org-entry-get nil \"DEADLINE\") %(or (org-entry-get nil \"PROGRESS\") \"0%\") %b")
+                (org-tags-match-list-sublevels t)))
+    (tags-todo "CATEGORY=\"advices\"/NEXT"
+               ((org-agenda-overriding-header "Up next")
+                (org-tags-match-list-sublevels t)))
+    ;; (tags-todo "CATEGORY=\"advices\""
+    ;;            ((org-agenda-overriding-header "Status")
+    ;;             (org-agenda-prefix-format "  %b ")
+    ;;             (org-agenda-dim-blocked-tasks 'invisible)
+    ;;             (org-super-agenda-groups
+    ;;              '((:todo "REVIEW")
+    ;;                (:todo "STARTED")
+    ;;                (:todo "NEXT")
+    ;;                (:discard (:anything t))))))
+    (tags-todo "CATEGORY=\"advices\"-@invalid"
+               ((org-agenda-overriding-header "Overview")
+                (org-agenda-sorting-strategy '(user-defined-up))
+                (org-agenda-prefix-format "  %s ")
+                (org-tags-match-list-sublevels nil)
+                (org-agenda-cmp-user-defined 'akirak/org-agenda-cmp-sanity-level)))
+    (tags-todo "CATEGORY=\"advices\"+@invalid"
+               ((org-agenda-overriding-header "Invalid")
+                (org-tags-match-list-sublevels nil)
+                (org-agenda-prefix-format "  %b ")))))
 
 (defun akirak/org-agenda-cmp-sanity-level (a b)
   (let* ((ma (or (get-text-property 1 'org-marker a)
@@ -314,7 +379,7 @@
     (with-current-buffer (or (find-buffer-visiting file)
                              (find-file-noselect file))
       (org-with-wide-buffer
-       (if-let ((pos (org-find-property "CUSTOM_ID" "emacs-start")))
+       (if-let ((pos (org-find-property "CUSTOM_ID" "entry-points")))
            (let ((org-indirect-buffer-display 'current-window))
              (goto-char pos)
              (org-tree-to-indirect-buffer)
@@ -339,6 +404,12 @@
   (switch-to-buffer (akirak/org-start-page-buffer)))
 
 (add-hook 'emacs-startup-hook 'akirak/setup-startup-windows)
+
+(defun akirak/refresh-session ()
+  (interactive)
+  (save-some-buffers t)
+  (desktop-clear)
+  (akirak/org-start-page))
 
 ;;;; Other org options
 
