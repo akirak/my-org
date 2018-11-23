@@ -113,6 +113,22 @@
                                                     :tags '("@topic"))
               :clock-in t :clock-resume t)))
 
+(defun akirak/org-refile-to-code (arg)
+  "Refile the current entry into the date tree in code.org.
+
+When the prefix ARG is set, jump to the date tree."
+  (interactive "P")
+  (when-let
+      ((date (org-read-date nil nil nil "Refile to code.org on date: "))
+       (file (org-starter-locate-file "code.org" nil t))
+       (rfloc (with-current-buffer (or (find-buffer-visiting file)
+                                       (find-file-no-select file))
+                (org-reverse-datetree-1 (org-time-string-to-time date)
+                                        :return 'rfloc))))
+    (org-refile nil nil rfloc)
+    (when arg
+      (org-refile '(16)))))
+
 (org-starter-def "posts.org"
   :key "P"
   :required nil
