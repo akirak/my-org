@@ -163,6 +163,10 @@ When the prefix ARG is set, jump to the date tree."
   :agenda t
   :refile (:maxlevel . 3))
 
+(org-starter-def "random.org"
+  ;; TODO: Add capture template
+  )
+
 ;; Configure files for linguistic study.
 ;; All of these files have basically the same structure, but they can
 ;; also have some additional language-specific structures.
