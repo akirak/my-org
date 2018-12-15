@@ -299,25 +299,6 @@ destination."
                    ;; Group by tags as you like
                    (:tag "maintenance")))))))
 
-(org-starter-add-agenda-custom-command "f" "Focus"
-  ;; @focus tag is usually set as a file tag
-  '((tags-todo "@focus"
-               ((org-agenda-overriding-header "Tasks in specific categories")
-                (org-agenda-sorting-strategy '(scheduled-down priority-up))
-                (org-agenda-prefix-format "  %5e %s %-7c %b")
-                (org-super-agenda-groups
-                 '((:todo "REVIEW")
-                   (:tag "@fix")
-                   (:todo "STARTED")
-                   (:todo "NEXT")
-                   (:auto-category t)))))))
-
-(akirak/define-frame-workflow "focus"
-  :key "f"
-  :layout '(progn
-             (org-agenda nil "f")
-             (delete-other-windows)))
-
 (org-starter-add-agenda-custom-command "r" "Review"
   '((tags-todo "CATEGORY=\"facts\""
                ((org-agenda-overriding-header "Reflection")
@@ -364,12 +345,6 @@ destination."
          (lb (and fb (with-current-buffer fb (org-entry-get mb "SANITY_LEVEL")))))
     (or (and la lb (< (math-read-number la) (math-read-number lb)))
         0)))
-
-(org-starter-add-agenda-custom-command "x" "Explore"
-  'tags-todo "@explore"
-  '((org-agenda-overriding-header "Explore")
-    (org-agenda-prefix-format "  %-8:c %b ")
-    (org-agenda-sorting-strategy '(priority-down))))
 
 ;;;; Startup
 
