@@ -67,10 +67,10 @@
         ("WAITING" . (:foreground "MediumPurple2" :weight bold :underline t))
         ("MAYBE" . (:foreground "LimeGreen" :underline t))))
 
-(ert-deftest akirak/org-todo-keyword-faces-defined ()
-  "`org-todo-keyword-faces' should be defined for each item in `org-todo-keywords'."
-  (cl-loop for keyword in (akirak//org-todo-keyword-names)
-           do (should (assoc keyword org-todo-keyword-faces))))
+;; (ert-deftest akirak/org-todo-keyword-faces-defined ()
+;;   "`org-todo-keyword-faces' should be defined for each item in `org-todo-keywords'."
+;;   (cl-loop for keyword in (akirak//org-todo-keyword-names)
+;;            do (should (assoc keyword org-todo-keyword-faces))))
 
 (defun akirak/clock-in-to-next (kw)
   "Switch a task from TODO to IN_PROGRESS when clocking in.
