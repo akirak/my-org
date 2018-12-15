@@ -201,10 +201,7 @@ When the prefix ARG is set, jump to the date tree."
 ;; Set org-default-notes-file
 (unless (bound-and-true-p org-default-notes-file)
   (setq org-default-notes-file "~/notes.org")
-  (message "Set org-default-notes-file to %s" org-default-notes-file)
-  (unless (file-exists-p org-default-notes-file)
-    (with-temp-buffer
-      (write-file org-default-notes-file))))
+  (message "Set org-default-notes-file to %s" org-default-notes-file))
 
 (org-starter-def "journal.org"
   :agenda t
