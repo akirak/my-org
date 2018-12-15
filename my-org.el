@@ -1,3 +1,25 @@
+;;;; Org options
+
+;;;;; Org tags 
+
+(setq-default org-group-tags t
+              ;; org-use-fast-tag-selection t
+              ;; org-fast-tag-selection-single-key nil
+              org-agenda-use-tag-inheritance t
+              org-tags-exclude-from-inheritance
+              '(
+                ;; "objective"
+                ;; "sprint"
+                ;; "agenda-group"
+                ))
+
+(require 'my-org-todo)
+
+;;;;; Other org options
+
+(with-eval-after-load 'org-clock
+  (org-clock-persistence-insinuate))
+
 ;;;; Org directories
 
 ;;;;; ~/org
@@ -386,10 +408,5 @@ destination."
   (save-some-buffers t)
   (desktop-clear)
   (akirak/org-start-page))
-
-;;;; Other org options
-
-(with-eval-after-load 'org-clock
-  (org-clock-persistence-insinuate))
 
 (provide 'my-org)
