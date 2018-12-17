@@ -399,11 +399,9 @@ destination."
 
 ;; Override the existing function to set up startup windows.
 (defun akirak/setup-startup-windows ()
-  (switch-to-buffer "*Messages*")
-  (if (< (frame-width) 160)
-      (split-window-below)
-    (split-window-right))
-  (switch-to-buffer (akirak/org-start-page-buffer)))
+  (switch-to-buffer (or (get-buffer "*Backtrace*")
+                        (akirak/org-start-page-buffer)))
+  (delete-other-windows))
 
 (add-hook 'emacs-startup-hook 'akirak/setup-startup-windows)
 
