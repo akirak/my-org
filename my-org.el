@@ -88,6 +88,7 @@
 (org-starter-define-file "planner.org"
   :key "p"
   :agenda t
+  :deprecated t
   :required nil
   :refile '(:maxlevel . 3))
 
