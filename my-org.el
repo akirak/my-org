@@ -102,6 +102,10 @@
   :refile '(:maxlevel . 9)
   :deprecated t)
 
+(org-starter-def "development.org"
+  :agenda t
+  :refile (:maxlevel . 9))
+
 (org-starter-def "workflow.org"
   :key "w"
   :agenda nil
