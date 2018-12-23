@@ -106,12 +106,6 @@
   :agenda t
   :refile (:maxlevel . 9))
 
-(org-starter-def "workflow.org"
-  :key "w"
-  :agenda nil
-  :deprecated t
-  :refile (:maxlevel . 4))
-
 (org-starter-def "~/.emacs.d/main.org"
   :refile (:maxlevel . 5))
 
