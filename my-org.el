@@ -107,6 +107,10 @@
   :deprecated t
   :refile (:maxlevel . 4))
 
+(org-starter-def "~/nixos/README.org"
+  :agenda t
+  :refile (:maxlevel . 5))
+
 (defun akirak/buffer-mode-name (filename)
   (with-current-buffer (find-buffer-visiting filename)
     (string-remove-suffix "-mode" (symbol-name major-mode))))
