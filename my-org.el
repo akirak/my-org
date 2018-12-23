@@ -113,6 +113,9 @@
   :agenda t
   :refile (:maxlevel . 5))
 
+(org-starter-def "~/hugo/README.org"
+  :refile (:maxlevel . 3))
+
 (defun akirak/buffer-mode-name (filename)
   (with-current-buffer (find-buffer-visiting filename)
     (string-remove-suffix "-mode" (symbol-name major-mode))))
