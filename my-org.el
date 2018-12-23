@@ -112,6 +112,9 @@
   :deprecated t
   :refile (:maxlevel . 4))
 
+(org-starter-def "~/.emacs.d/main.org"
+  :refile (:maxlevel . 5))
+
 (org-starter-def "~/nixos/README.org"
   :agenda t
   :refile (:maxlevel . 5))
