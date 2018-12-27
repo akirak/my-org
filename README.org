@@ -1,4 +1,6 @@
 * My Org-Mode Configuration
+**Deprecation notice: I've experimentally switched to an Org-based personal configuration, so I am not using this configuration now.**
+
 This is my configuration for Emacs Org mode.
 
 It has been separated from [[https://github.com/akirak/emacs.d][my Emacs configuration]], as most changes in the Org configuration are unlikely to be of interest to a few watching users of the main configuration repository.
